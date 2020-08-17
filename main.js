@@ -27,22 +27,22 @@ async function searchSong(searchValue){
     const searchResult = await fetch(`${apiURL}/suggest/${searchValue}`)
     const data = await searchResult.json();
 
-    //  console.log(data)
+    //   console.log(data)
     showData(data)
 }
 
 //display final result 
 
 function showData(data){
-  
+  data=data.data.splice (0, 10)
     result.innerHTML = `
     <ul class="song-list">
-      ${data.data
+      ${data
         .map(song=> `<li>
                     <div>
                         <h3>${song.artist.name}</h3> ${song.title} 
                     </div>
-                    <span data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</span>
+                    <span class="btn btn-success" style="" data-artist="${song.artist.name}" data-songtitle="${song.title}"> Get Lyrics</span>
                 </li>`
         )
         .join('')}
@@ -78,7 +78,7 @@ async function getLyrics(artist, songTitle) {
   }
 
 
-  //display-clear 
+//   //display-clear 
 
   document.getElementById('clean').addEventListener('click', function(){
       result.innerText = "";
